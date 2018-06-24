@@ -4,8 +4,19 @@
   "description": "the game on vue.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "budo index.js:bundle.js -- -t vueify",
+    "test": "node test.js"
+  },
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
   },
   "author": "alekseos",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "budo": "^11.3.0",
+    "vue.js": "^0.3.2"
+  },
+  "devDependencies": {
+    "vueify": "^9.4.1"
+  }
 }

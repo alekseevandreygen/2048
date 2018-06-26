@@ -1,10 +1,14 @@
 <template>
     <ul>
-        <li v-for="bear in bears" @click="click(bear, $event)">
+        <li 
+            v-for="(bear, index) in bears"
+            @click="click(bear, $event)"
+            :key="index"
+        >
             {{bear}}
         </li>
     </ul>
-</template>\
+</template>
 
 <script>
 module.exports = {

@@ -1,13 +1,13 @@
 <template>
-    <ul>
-        <li 
+    <div>
+        <div 
             v-for="(bear, index) in bears"
             @click="click(bear, $event)"
             :key="index"
         >
-            {{bear}}
-        </li>
-    </ul>
+            {{ bear }}
+        </div>
+    </div>
 </template>
 
 <script>

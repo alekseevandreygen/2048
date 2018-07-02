@@ -3,8 +3,12 @@
         class="container"
     >
         <Field :fields="fields" />
-        <Step v-on:generateNewStep="generateNewStep" />
-        <Controls />
+        <Step 
+            v-on:generateNewStep="generateNewStep" 
+        />
+        <Controls 
+        />
+        <div @click="leftEvent">dsds</div>
     </div>
 </template>
 
@@ -28,6 +32,19 @@ module.exports = {
     methods: {
         generateNewStep: function(generateNewStep) {
             this.$set(this.fields[generateNewStep.x], generateNewStep.y, 2);
+        },
+        leftEvent: function() {
+            let oldState = this.fields;
+            let newState = new Array();
+            for (let i = 0; i < oldState.length; i++) {
+                newState[i] = new Array();
+                for (let j = oldState.length-1; j >= 0; j--) {
+                    newState[i][j] = oldState[i][j] + oldState[i][j-1];
+
+                }
+
+            }
+            console.log(oldState, newState);
         }
     },
     components: {

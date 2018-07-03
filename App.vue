@@ -39,11 +39,88 @@ module.exports = {
             for (let i = 0; i < oldState.length; i++) {
                 newState[i] = new Array();
                 for (let j = oldState.length-1; j >= 0; j--) {
-                    newState[i][j] = oldState[i][j] + oldState[i][j-1];
 
+                    if ( oldState[i][j] === 0 &&
+                        oldState[i][j-1] === 0 &&
+                        oldState[i][j-2] === 0 &&
+                        oldState[i][j-3] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = 0;
+                        newState[i][j-1] = 0;
+                        newState[i][j] = 0;
+                    } else if (
+                        oldState[i][j] === 0 &&
+                        oldState[i][j-1] === 0 &&
+                        oldState[i][j-2] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = 0;
+                        newState[i][j-1] = 0;
+                        newState[i][j] = oldState[i][j-3];
+                    } else if (
+                        oldState[i][j] === 0 &&
+                        oldState[i][j-1] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = 0;
+                        newState[i][j-1] = 0;
+                        newState[i][j] = oldState[i][j-3];
+                    } else if (
+                        oldState[i][j] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = 0;
+                        newState[i][j-1] = 0;
+                        newState[i][j] = oldState[i][j-1];
+                    } else if (
+                        oldState[i][j-1] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = oldState[i][j-3];
+                        newState[i][j-1] = oldState[i][j-2];
+                        newState[i][j] = oldState[i][j];
+                    } else if (
+                        oldState[i][j-2] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = oldState[i][j-3];
+                        newState[i][j-1] = oldState[i][j-1];
+                        newState[i][j] = oldState[i][j];
+                    } else if (
+                        oldState[i][j-3] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = oldState[i][j-2];
+                        newState[i][j-1] = oldState[i][j-1];
+                        newState[i][j] = oldState[i][j];
+                    } else if (
+                        oldState[i][j] === 0 &&
+                        oldState[i][j-2] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = oldState[i][j-3];
+                        newState[i][j-1] = oldState[i][j-2];
+                        newState[i][j] = oldState[i][j-1];
+                    } else if (
+                        oldState[i][j-1] === 0 &&
+                        oldState[i][j-3] === 0
+                    ) {
+                        newState[i][j-3] = 0;
+                        newState[i][j-2] = 0;
+                        newState[i][j-1] = oldState[i][j-2];
+                        newState[i][j] = oldState[i][j];
+                    } else {
+                        newState[i][j-3] = oldState[i][j-3];
+                        newState[i][j-2] = oldState[i][j-2];
+                        newState[i][j-1] = oldState[i][j-1];
+                        newState[i][j] = oldState[i][j];
+                    }
+                    break;
                 }
 
             }
+            this.$set(this.fields, newState);
             console.log(oldState, newState);
         }
     },
